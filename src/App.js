@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function App() {
   const [firstName, setFirstName] = useState(""); 
@@ -11,22 +11,30 @@ function App() {
     console.log(`Submitted Name: ${firstName} ${lastName}`);
   };
 
-
+  const inputEvent = (e) => {
+    const { name, value } = e.target;
+    if (name === "firstName") {
+      setFirstName(value);
+    } else if (name === "lastName") {
+      setLastName(value);
+    }
+  };
 
   return (
     <div className="App">
       <h2>Full Name Display</h2>
       <form
-        onSubmit={handleSubmit} 
+        onSubmit={handleSubmit}
         style={{ display: "grid", alignItems: "center", gap: "10px" }}
       >
         <label>
-          Name:
+          First Name:
           <input
             type="text"
+            name="firstName"
             placeholder="Enter your First Name"
-            value={firstName} 
-            onChange={(e) => setFirstName(e.target.value)} 
+            value={firstName}
+            onChange={inputEvent}
             required
           />
         </label>
@@ -34,9 +42,10 @@ function App() {
           Last Name:
           <input
             type="text"
+            name="lastName"
             placeholder="Enter your Last Name"
-            value={lastName} 
-            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+            onChange={inputEvent}
             required
           />
         </label>
@@ -44,8 +53,7 @@ function App() {
           Submit
         </button>
       </form>
-      {firstName && lastName ? <h4>Full Name: {name}</h4> : null}
-      
+      {name && <h4>Full Name: {name}</h4>}
     </div>
   );
 }

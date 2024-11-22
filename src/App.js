@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [firstName, setFirstName] = useState(""); 
+  const [lastName, setLastName] = useState(""); 
+  const [name, setName] = useState(""); 
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    setName(`${firstName} ${lastName}`); 
+    console.log(`Submitted Name: ${firstName} ${lastName}`);
+  };
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Full Name Display</h2>
+      <form
+        onSubmit={handleSubmit} 
+        style={{ display: "grid", alignItems: "center", gap: "10px" }}
+      >
+        <label>
+          Name:
+          <input
+            type="text"
+            placeholder="Enter your First Name"
+            value={firstName} 
+            onChange={(e) => setFirstName(e.target.value)} 
+            required
+          />
+        </label>
+        <label>
+          Last Name:
+          <input
+            type="text"
+            placeholder="Enter your Last Name"
+            value={lastName} 
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit" style={{ width: "100px" }}>
+          Submit
+        </button>
+      </form>
+      <h4>Full Name: {name}</h4>
     </div>
   );
 }

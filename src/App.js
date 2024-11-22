@@ -44,7 +44,7 @@ function App() {
           Submit
         </button>
       </form>
-      {firstName && lastName ? <h4>Full Name: {name}</h4> : <h4>Please enter Name</h4>}
+      {firstName && lastName ? <h4>Full Name: {name}</h4> : null}
       
     </div>
   );
